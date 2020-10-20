@@ -14,7 +14,7 @@ export default class Tree {
   }
 
   get getFruit() {
-    return this.#fruit;
+    return this.#fruit ? this.#fruit : 'No fruit';
   }
 
   set setFruit(fruit) {

@@ -87,7 +87,7 @@ describe('Kata #9: factoría de objetos', () => {
     expect(tree.getFruit()).toBe('pear');
   });
 
-  test('plantTreeWithGetters setFruit set frui value when it is a string', () => {
+  test('plantTreeWithGetters setFruit set fruit value when it is a string', () => {
     var tree = plantTreeWithGetters('pearTree', 'pear');
     tree.setFruit('apple');
     expect(tree.getFruit()).toBe('apple');
