@@ -9,5 +9,6 @@ function test() {
 
 test();
 
-// 'a' tiene un scope local, por lo que es accesible dentro de la función test
-// Pero, su valor se asigna después de llamar a console.log(a) por lo que su valor en ese momento es undefined
+// 'a' y 'foo()' tienes un scope local en la funcón test(), por lo que solo son accesibles dentro de esta.
+// Pero, en caso de la variable 'a', su valor se asigna después de llamar a console.log(a) por lo que su valor en ese momento es undefined
+// No ocurre lo mismo con la funcion foo(), que es accesible dentro de todo el bloque de la función test()

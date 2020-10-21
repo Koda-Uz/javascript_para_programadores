@@ -5,7 +5,3 @@ export const tree = {
     return this.fruit ? this.fruit : 'No fruit';
   },
 };
-
-export default function getFruit(tree) {
-  return tree.fruit ? tree.fruit : 'No fruit';
-}
