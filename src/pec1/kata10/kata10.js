@@ -6,7 +6,7 @@ String.prototype.presentTree = function (fruit) {
   }
 };
 
-export function plantTreeWithGetters(species, fruit) {
+export function plantTree(species, fruit) {
   let mySpecie = species;
   let myFruit = fruit;
   if (typeof mySpecie === 'string' && typeof myFruit == 'string') {

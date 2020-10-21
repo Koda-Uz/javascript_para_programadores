@@ -1,5 +1,10 @@
 export default class Tree {
   //Experimental Features
+  /**
+   * Los atributos de clase privados son una característica experimental del lenguaje
+   * Que aún no ha sido aprobada y puede no estar soportada en todos los navegadores
+   * Más info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
+   */
   #species;
   #fruit;
   #regex;
