@@ -55,4 +55,43 @@ export default class PEC2 {
     });
     return selectedFilms;
   }
+
+  async getMovieInfo(id) {
+    let response = await fetch('https://swapi.dev/api/films/');
+    let json = await response.json();
+    let selectedFilm;
+    json.results.forEach((film) => {
+      if (film.episode_id == id) {
+        selectedFilm = {
+          name: film.title,
+          episodeID: film.episode_id,
+          characters: film.characters,
+        };
+      }
+    });
+    return selectedFilm;
+  }
+
+  async getCharacerName(url) {
+    // Necesario para los siguientes apartados
+    url = url.replace('http://', 'https://');
+
+    let response = await fetch(url);
+    let res = await response.json();
+    return res.name;
+  }
+
+  async getMovieCharacters(id) {
+    let film = await this.getMovieInfo(id);
+    let promises = [];
+    film.characters.forEach((character) => {
+      promises.push(
+        new Promise((resolve, reject) => {
+          return resolve(this.getCharacerName(character));
+        })
+      );
+    });
+    film.characters = await Promise.all(promises);
+    return film;
+  }
 }
