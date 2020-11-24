@@ -35,4 +35,24 @@ export default class PEC2 {
     });
     return films;
   }
+
+  async listEvenMoviesSorted() {
+    let films = await this.listMovies();
+    let selectedFilms = [];
+    films.forEach((film) => {
+      if (film.episodeID % 2 == 0) {
+        selectedFilms.push(film);
+      }
+    });
+    selectedFilms.sort(function (a, b) {
+      if (a.episodeID < b.episodeID) {
+        return -1;
+      }
+      if (a.episodeID > b.episodeID) {
+        return 1;
+      }
+      return 0;
+    });
+    return selectedFilms;
+  }
 }

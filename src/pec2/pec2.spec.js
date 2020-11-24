@@ -94,4 +94,29 @@ describe('PEC2: Tests', () => {
     const actual = await pec2.listMoviesSorted();
     expect(actual).toEqual(expected);
   });
+
+  test('.listEvenMoviesSorted()', async () => {
+    const expected = [
+      {
+        name: 'Attack of the Clones',
+        director: 'George Lucas',
+        release: '2002-05-16',
+        episodeID: 2,
+      },
+      {
+        name: 'A New Hope',
+        director: 'George Lucas',
+        release: '1977-05-25',
+        episodeID: 4,
+      },
+      {
+        name: 'Return of the Jedi',
+        director: 'Richard Marquand',
+        release: '1983-05-25',
+        episodeID: 6,
+      },
+    ];
+    const actual = await pec2.listEvenMoviesSorted();
+    expect(actual).toEqual(expected);
+  });
 });
