@@ -94,4 +94,39 @@ export default class PEC2 {
     film.characters = await Promise.all(promises);
     return film;
   }
+
+  // Exercise 6
+  async getPlanetName(url) {
+    url = url.replace('http://', 'https://');
+
+    let response = await fetch(url);
+    let res = await response.json();
+    return res.name;
+  }
+
+  async getCharacerNameAndHomeworld(url) {
+    url = url.replace('http://', 'https://');
+
+    let response = await fetch(url);
+    let res = await response.json();
+    let homeworld = await this.getPlanetName(res.homeworld);
+    return {
+      name: res.name,
+      homewolrd: homeworld,
+    };
+  }
+
+  async getMovieCharactersAndHomeworlds(id) {
+    let film = await this.getMovieInfo(id);
+    let promises = [];
+    film.characters.forEach((character) => {
+      promises.push(
+        new Promise((resolve, reject) => {
+          return resolve(this.getCharacerNameAndHomeworld(character));
+        })
+      );
+    });
+    film.characters = await Promise.all(promises);
+    return film;
+  }
 }

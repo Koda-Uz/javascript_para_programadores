@@ -183,4 +183,33 @@ describe('PEC2: Tests', () => {
     const actual = await pec2.getMovieCharacters(4);
     expect(actual).toEqual(expected);
   });
+
+  test('.getMovieCharactersAndHomeworlds()', async () => {
+    const expected = {
+      characters: [
+        { homewolrd: 'Tatooine', name: 'Luke Skywalker' },
+        { homewolrd: 'Tatooine', name: 'C-3PO' },
+        { homewolrd: 'Naboo', name: 'R2-D2' },
+        { homewolrd: 'Tatooine', name: 'Darth Vader' },
+        { homewolrd: 'Alderaan', name: 'Leia Organa' },
+        { homewolrd: 'Tatooine', name: 'Owen Lars' },
+        { homewolrd: 'Tatooine', name: 'Beru Whitesun lars' },
+        { homewolrd: 'Tatooine', name: 'R5-D4' },
+        { homewolrd: 'Tatooine', name: 'Biggs Darklighter' },
+        { homewolrd: 'Stewjon', name: 'Obi-Wan Kenobi' },
+        { homewolrd: 'Eriadu', name: 'Wilhuff Tarkin' },
+        { homewolrd: 'Kashyyyk', name: 'Chewbacca' },
+        { homewolrd: 'Corellia', name: 'Han Solo' },
+        { homewolrd: 'Rodia', name: 'Greedo' },
+        { homewolrd: 'Nal Hutta', name: 'Jabba Desilijic Tiure' },
+        { homewolrd: 'Corellia', name: 'Wedge Antilles' },
+        { homewolrd: 'Bestine IV', name: 'Jek Tono Porkins' },
+        { homewolrd: 'Alderaan', name: 'Raymus Antilles' },
+      ],
+      episodeID: 4,
+      name: 'A New Hope',
+    };
+    const actual = await pec2.getMovieCharactersAndHomeworlds(4);
+    expect(actual).toEqual(expected);
+  });
 });
