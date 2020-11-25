@@ -1,4 +1,5 @@
 import PEC2 from './pec2';
+import { Movie } from './pec2';
 
 describe('PEC2: Tests', () => {
   const pec2 = new PEC2();
@@ -149,9 +150,9 @@ describe('PEC2: Tests', () => {
     expect(actual).toEqual(expected);
   });
 
-  test('.getMovieInfo()', async () => {
+  test('.getCharacterName()', async () => {
     const expected = 'Luke Skywalker';
-    const actual = await pec2.getCharacerName('http://swapi.dev/api/people/1/');
+    const actual = await pec2.getCharacterName('http://swapi.dev/api/people/1/');
     expect(actual).toEqual(expected);
   });
 
