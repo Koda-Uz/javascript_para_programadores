@@ -1,8 +1,6 @@
-import PEC2 from './pec2';
+import * as pec2 from './pec2';
 
 describe('PEC2: Tests', () => {
-  const pec2 = new PEC2();
-
   test('.getMovieCount()', async () => {
     const expected = 6;
     const actual = await pec2.getMovieCount();
