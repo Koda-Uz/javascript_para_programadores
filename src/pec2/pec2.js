@@ -1,11 +1,14 @@
+// PEC2: Álvaro Pérez Gómez
 const fetch = require('node-fetch');
 
+// Exercise 1
 async function getMovieCount() {
   let response = await fetch('https://swapi.dev/api/films/');
   let json = await response.json();
   return json.count;
 }
 
+// Exercise 2
 async function listMovies() {
   let response = await fetch('https://swapi.dev/api/films/');
   let json = await response.json();
@@ -21,6 +24,7 @@ async function listMovies() {
   return films;
 }
 
+// Exercise 3
 async function listMoviesSorted() {
   let films = await listMovies();
   films.sort(function (a, b) {
@@ -35,6 +39,7 @@ async function listMoviesSorted() {
   return films;
 }
 
+// Exercise 4
 async function listEvenMoviesSorted() {
   let films = await listMovies();
   let selectedFilms = [];
@@ -55,6 +60,8 @@ async function listEvenMoviesSorted() {
   return selectedFilms;
 }
 
+// Exercise 5
+// Exercise 5.1
 async function getMovieInfo(id) {
   let response = await fetch('https://swapi.dev/api/films/');
   let json = await response.json();
@@ -71,6 +78,7 @@ async function getMovieInfo(id) {
   return selectedFilm;
 }
 
+// Exercise 5.2
 async function getCharacterName(url) {
   // Necesario para los siguientes apartados
   url = url.replace('http://', 'https://');
@@ -80,6 +88,7 @@ async function getCharacterName(url) {
   return res.name;
 }
 
+// Exercise 5.3
 async function getMovieCharacters(id) {
   let film = await getMovieInfo(id);
   let promises = [];
@@ -130,6 +139,13 @@ async function getMovieCharactersAndHomeworlds(id) {
 }
 
 //Exercise 7 and 8
+// Si solicitamos la información de una película con un id incorrecto
+// la llamada a getMovieInfo() devolverá undefined.
+// Si capturamos ese valor podemos lanzar una excepción para poder gestionar
+// este error de forma adecuada.
+// Adicionalmente tambíen se podría comprobar el código de respuesta de la API
+// para verificar si la petición es correcta ya que delvoverá el código 200.
+// En caso de rror devolverá 404, 401, etc.
 async function createMovie(id) {
   const movie = await getMovieInfo(id);
   if (movie != undefined) {
@@ -148,7 +164,6 @@ class Movie {
 
   // Auxiliary functions
   async getCharacterInfo(url) {
-    // Necesario para los siguientes apartados
     url = url.replace('http://', 'https://');
 
     let response = await fetch(url);

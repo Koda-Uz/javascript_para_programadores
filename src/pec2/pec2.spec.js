@@ -1,12 +1,15 @@
+// PEC2: Álvaro Pérez Gómez
 import * as pec2 from './pec2';
 
 describe('PEC2: Tests', () => {
+  // Exercise 1
   test('.getMovieCount()', async () => {
     const expected = 6;
     const actual = await pec2.getMovieCount();
     expect(actual).toEqual(expected);
   });
 
+  // Exercise 2
   test('.listMovies()', async () => {
     const expected = [
       {
@@ -50,6 +53,7 @@ describe('PEC2: Tests', () => {
     expect(actual).toEqual(expected);
   });
 
+  // Exercise 3
   test('.listMoviesSorted()', async () => {
     const expected = [
       {
@@ -93,6 +97,7 @@ describe('PEC2: Tests', () => {
     expect(actual).toEqual(expected);
   });
 
+  // Exercise 4
   test('.listEvenMoviesSorted()', async () => {
     const expected = [
       {
@@ -118,6 +123,7 @@ describe('PEC2: Tests', () => {
     expect(actual).toEqual(expected);
   });
 
+  // Exercise 5,1
   test('.getMovieInfo()', async () => {
     const expected = {
       characters: [
@@ -147,12 +153,14 @@ describe('PEC2: Tests', () => {
     expect(actual).toEqual(expected);
   });
 
+  // Exercise 5.2
   test('.getCharacterName()', async () => {
     const expected = 'Luke Skywalker';
     const actual = await pec2.getCharacterName('http://swapi.dev/api/people/1/');
     expect(actual).toEqual(expected);
   });
 
+  // Exercise 5.3
   test('.getMovieCharacters()', async () => {
     const expected = {
       characters: [
@@ -182,6 +190,7 @@ describe('PEC2: Tests', () => {
     expect(actual).toEqual(expected);
   });
 
+  // Exercise 6
   test('.getMovieCharactersAndHomeworlds()', async () => {
     const expected = {
       characters: [
