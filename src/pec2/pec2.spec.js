@@ -297,4 +297,9 @@ describe('PEC2: Tests', () => {
     const actual = await movie.getHomeworldsReverse();
     expect(actual).toEqual(expected);
   });
+
+  // Exercise 8
+  test('.createMovie() throws error', async () => {
+    await expect(pec2.createMovie(777)).rejects.toEqual(Error('Movie does not exist'));
+  });
 });

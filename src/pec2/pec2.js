@@ -132,9 +132,13 @@ export default class PEC2 {
     return film;
   }
 
-  //Exercise 7
+  //Exercise 7 and 8
   async createMovie(id) {
     const movie = await this.getMovieInfo(id);
-    return new Movie(movie.name, movie.characters);
+    if (movie != undefined) {
+      return new Movie(movie.name, movie.characters);
+    } else {
+      throw new Error('Movie does not exist');
+    }
   }
 }
