@@ -1,5 +1,4 @@
 import PEC2 from './pec2';
-import { Movie } from './pec2';
 
 describe('PEC2: Tests', () => {
   const pec2 = new PEC2();
@@ -211,6 +210,91 @@ describe('PEC2: Tests', () => {
       name: 'A New Hope',
     };
     const actual = await pec2.getMovieCharactersAndHomeworlds(4);
+    expect(actual).toEqual(expected);
+  });
+
+  // Exercise 7
+  test('Movie.name', async () => {
+    const expected = 'A New Hope';
+    const movie = await pec2.createMovie(4);
+    expect(movie.name).toEqual(expected);
+  });
+
+  test('Movie.getCharcters()', async () => {
+    const expected = [
+      'Luke Skywalker',
+      'C-3PO',
+      'R2-D2',
+      'Darth Vader',
+      'Leia Organa',
+      'Owen Lars',
+      'Beru Whitesun lars',
+      'R5-D4',
+      'Biggs Darklighter',
+      'Obi-Wan Kenobi',
+      'Wilhuff Tarkin',
+      'Chewbacca',
+      'Han Solo',
+      'Greedo',
+      'Jabba Desilijic Tiure',
+      'Wedge Antilles',
+      'Jek Tono Porkins',
+      'Raymus Antilles',
+    ];
+    const movie = await pec2.createMovie(4);
+    const actual = await movie.getCharacters();
+    expect(actual).toEqual(expected);
+  });
+
+  test('Movie.getHomeworlds()', async () => {
+    const expected = [
+      'Tatooine',
+      'Tatooine',
+      'Naboo',
+      'Tatooine',
+      'Alderaan',
+      'Tatooine',
+      'Tatooine',
+      'Tatooine',
+      'Tatooine',
+      'Stewjon',
+      'Eriadu',
+      'Kashyyyk',
+      'Corellia',
+      'Rodia',
+      'Nal Hutta',
+      'Corellia',
+      'Bestine IV',
+      'Alderaan',
+    ];
+    const movie = await pec2.createMovie(4);
+    const actual = await movie.getHomeworlds();
+    expect(actual).toEqual(expected);
+  });
+
+  test('Movie.getHomeworldsReverse()', async () => {
+    const expected = [
+      'Tatooine',
+      'Tatooine',
+      'Tatooine',
+      'Tatooine',
+      'Tatooine',
+      'Tatooine',
+      'Tatooine',
+      'Stewjon',
+      'Rodia',
+      'Nal Hutta',
+      'Naboo',
+      'Kashyyyk',
+      'Eriadu',
+      'Corellia',
+      'Corellia',
+      'Bestine IV',
+      'Alderaan',
+      'Alderaan',
+    ];
+    const movie = await pec2.createMovie(4);
+    const actual = await movie.getHomeworldsReverse();
     expect(actual).toEqual(expected);
   });
 });
