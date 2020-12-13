@@ -1,11 +1,11 @@
 // PEC2: Álvaro Pérez Gómez
-import * as pec2 from './pec2';
+import m from './pec2';
 
 describe('PEC2: Tests', () => {
   // Exercise 1
   test('.getMovieCount()', async () => {
     const expected = 6;
-    const actual = await pec2.getMovieCount();
+    const actual = await m.getMovieCount();
     expect(actual).toEqual(expected);
   });
 
@@ -49,7 +49,7 @@ describe('PEC2: Tests', () => {
         episodeID: 3,
       },
     ];
-    const actual = await pec2.listMovies();
+    const actual = await m.listMovies();
     expect(actual).toEqual(expected);
   });
 
@@ -93,7 +93,7 @@ describe('PEC2: Tests', () => {
         episodeID: 1,
       },
     ];
-    const actual = await pec2.listMoviesSorted();
+    const actual = await m.listMoviesSorted();
     expect(actual).toEqual(expected);
   });
 
@@ -119,7 +119,7 @@ describe('PEC2: Tests', () => {
         episodeID: 6,
       },
     ];
-    const actual = await pec2.listEvenMoviesSorted();
+    const actual = await m.listEvenMoviesSorted();
     expect(actual).toEqual(expected);
   });
 
@@ -149,14 +149,14 @@ describe('PEC2: Tests', () => {
       episodeID: 4,
       name: 'A New Hope',
     };
-    const actual = await pec2.getMovieInfo(4);
+    const actual = await m.getMovieInfo(4);
     expect(actual).toEqual(expected);
   });
 
   // Exercise 5.2
   test('.getCharacterName()', async () => {
     const expected = 'Luke Skywalker';
-    const actual = await pec2.getCharacterName('http://swapi.dev/api/people/1/');
+    const actual = await m.getCharacterName('http://swapi.dev/api/people/1/');
     expect(actual).toEqual(expected);
   });
 
@@ -186,7 +186,7 @@ describe('PEC2: Tests', () => {
       episodeID: 4,
       name: 'A New Hope',
     };
-    const actual = await pec2.getMovieCharacters(4);
+    const actual = await m.getMovieCharacters(4);
     expect(actual).toEqual(expected);
   });
 
@@ -216,14 +216,14 @@ describe('PEC2: Tests', () => {
       episodeID: 4,
       name: 'A New Hope',
     };
-    const actual = await pec2.getMovieCharactersAndHomeworlds(4);
+    const actual = await m.getMovieCharactersAndHomeworlds(4);
     expect(actual).toEqual(expected);
   });
 
   // Exercise 7
   test('Movie.name', async () => {
     const expected = 'A New Hope';
-    const movie = await pec2.createMovie(4);
+    const movie = await m.createMovie(4);
     expect(movie.name).toEqual(expected);
   });
 
@@ -248,7 +248,7 @@ describe('PEC2: Tests', () => {
       'Jek Tono Porkins',
       'Raymus Antilles',
     ];
-    const movie = await pec2.createMovie(4);
+    const movie = await m.createMovie(4);
     const actual = await movie.getCharacters();
     expect(actual).toEqual(expected);
   });
@@ -274,7 +274,7 @@ describe('PEC2: Tests', () => {
       'Bestine IV',
       'Alderaan',
     ];
-    const movie = await pec2.createMovie(4);
+    const movie = await m.createMovie(4);
     const actual = await movie.getHomeworlds();
     expect(actual).toEqual(expected);
   });
@@ -300,13 +300,13 @@ describe('PEC2: Tests', () => {
       'Alderaan',
       'Alderaan',
     ];
-    const movie = await pec2.createMovie(4);
+    const movie = await m.createMovie(4);
     const actual = await movie.getHomeworldsReverse();
     expect(actual).toEqual(expected);
   });
 
   // Exercise 8
   test('.createMovie() throws error', async () => {
-    await expect(pec2.createMovie(777)).rejects.toEqual(Error('Movie does not exist'));
+    await expect(m.createMovie(777)).rejects.toEqual(Error('Movie does not exist'));
   });
 });

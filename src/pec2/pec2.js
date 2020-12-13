@@ -232,7 +232,7 @@ class Movie {
   }
 }
 
-export {
+export default {
   getMovieCount,
   listMovies,
   listMoviesSorted,
