@@ -15,6 +15,33 @@ async function setMovieHeading(movieId, titleSelector, infoSelector, directorSel
   movieDirector.innerHTML = 'Director: ' + movie.director;
 }
 
+async function initMovieSelect(selector) {
+  // Obtenemos los elementos del DOM
+  const movieSelector = document.querySelector(selector);
+
+  // Obtenemos la lista de películas
+  const movieList = await pec2.listMoviesSorted();
+
+  // Añadimos la opción para el caso inicial "Select a movie"
+  // creamos una nueva opción
+  var opt = document.createElement('option');
+  // Le añadimos un nodo de texto
+  opt.appendChild(document.createTextNode('Select a movie'));
+  // Asignamos la propiedad value
+  opt.value = '';
+  // Añadimos la opción al selector
+  movieSelector.appendChild(opt);
+
+  // Añadimos el listado de peículas al HTML de igual forma que la opción por defecto
+  movieList.forEach((movie) => {
+    opt = document.createElement('option');
+    opt.appendChild(document.createTextNode(movie.name));
+    opt.value = movie.episodeID;
+    movieSelector.appendChild(opt);
+  });
+}
+
 export default {
   setMovieHeading,
+  initMovieSelect,
 };
