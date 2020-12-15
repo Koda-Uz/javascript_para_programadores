@@ -11,8 +11,8 @@ async function setMovieHeading(movieId, titleSelector, infoSelector, directorSel
 
   // Sustituimos los datos utilizando un método de reemplazo como innerHTML
   movieTitle.innerHTML = movie.name;
-  movieInfo.innerHTML = movie.release;
-  movieDirector.innerHTML = movie.director;
+  movieInfo.innerHTML = 'Episode ' + movie.episodeID + ' - ' + movie.release;
+  movieDirector.innerHTML = 'Director: ' + movie.director;
 }
 
 export default {
