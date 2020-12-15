@@ -6,13 +6,19 @@ async function setMovieHeading(movieId, titleSelector, infoSelector, directorSel
   const movieInfo = document.querySelector(infoSelector);
   const movieDirector = document.querySelector(directorSelector);
 
-  // Obtenemos la información de la película llamando al método de pec2.js
-  const movie = await pec2.getMovieInfo(movieId);
+  if (movieId != 0) {
+    // Obtenemos la información de la película llamando al método de pec2.js
+    const movie = await pec2.getMovieInfo(movieId);
 
-  // Sustituimos los datos utilizando un método de reemplazo como innerHTML
-  movieTitle.innerHTML = movie.name;
-  movieInfo.innerHTML = 'Episode ' + movie.episodeID + ' - ' + movie.release;
-  movieDirector.innerHTML = 'Director: ' + movie.director;
+    // Sustituimos los datos utilizando un método de reemplazo como innerHTML
+    movieTitle.innerHTML = movie.name;
+    movieInfo.innerHTML = 'Episode ' + movie.episodeID + ' - ' + movie.release;
+    movieDirector.innerHTML = 'Director: ' + movie.director;
+  } else {
+    movieTitle.innerHTML = '';
+    movieInfo.innerHTML = '';
+    movieDirector.innerHTML = '';
+  }
 }
 
 async function initMovieSelect(selector) {
@@ -28,7 +34,7 @@ async function initMovieSelect(selector) {
   // Le añadimos un nodo de texto
   opt.appendChild(document.createTextNode('Select a movie'));
   // Asignamos la propiedad value
-  opt.value = '';
+  opt.value = '0';
   // Añadimos la opción al selector
   movieSelector.appendChild(opt);
 
@@ -41,7 +47,17 @@ async function initMovieSelect(selector) {
   });
 }
 
+async function setMovieSelectCallbacks(selector, titleSelector, infoSelector, directorSelector) {
+  // Obtenemos los elementos del DOM
+  const movieSelector = document.querySelector(selector);
+  // Añadimos el event listener al selector
+  movieSelector.addEventListener('change', () => {
+    setMovieHeading(movieSelector.value, titleSelector, infoSelector, directorSelector);
+  });
+}
+
 export default {
   setMovieHeading,
   initMovieSelect,
+  setMovieSelectCallbacks,
 };
