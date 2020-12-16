@@ -1,11 +1,23 @@
 import pec2 from './pec2';
 
-async function setMovieHeading(movieId, titleSelector, infoSelector, directorSelector) {
-  // Obtenemos los elementos del DOM con QuerySelector y los almacenamos en una variable
-  const movieTitle = document.querySelector(titleSelector);
-  const movieInfo = document.querySelector(infoSelector);
-  const movieDirector = document.querySelector(directorSelector);
+let movieTitle;
+let movieInfo;
+let movieDirector;
+let movieSelector;
+let homeworldSelector;
+let charecterCardList;
 
+export async function setMovieHeading(movieId, titleSelector, infoSelector, directorSelector) {
+  // Obtenemos los elementos del DOM con QuerySelector y los almacenamos en una variable
+  movieTitle = document.querySelector(titleSelector);
+  movieInfo = document.querySelector(infoSelector);
+  movieDirector = document.querySelector(directorSelector);
+
+  // Rellenamos el header
+  _fillMovieHeading(movieId);
+}
+
+async function _fillMovieHeading(movieId) {
   if (movieId != 0) {
     // Obtenemos la información de la película llamando al método de pec2.js
     const movie = await pec2.getMovieInfo(movieId);
@@ -21,9 +33,9 @@ async function setMovieHeading(movieId, titleSelector, infoSelector, directorSel
   }
 }
 
-async function initMovieSelect(selector) {
+export async function initMovieSelect(selector) {
   // Obtenemos los elementos del DOM
-  const movieSelector = document.querySelector(selector);
+  movieSelector = document.querySelector(selector);
 
   // Obtenemos la lista de películas
   const movieList = await pec2.listMoviesSorted();
@@ -47,17 +59,69 @@ async function initMovieSelect(selector) {
   });
 }
 
-async function setMovieSelectCallbacks(selector, titleSelector, infoSelector, directorSelector) {
-  // Obtenemos los elementos del DOM
-  const movieSelector = document.querySelector(selector);
+export function initHomeworldSelect(homeworld) {
+  homeworldSelector = document.querySelector(homeworld);
+  _fillHomeworldSelector(1);
+}
+
+export function initCharacterList(characterList) {
+  charecterCardList = document.querySelector(characterList);
+}
+
+export async function setMovieSelectCallbacks() {
   // Añadimos el event listener al selector
   movieSelector.addEventListener('change', () => {
-    setMovieHeading(movieSelector.value, titleSelector, infoSelector, directorSelector);
+    _fillMovieHeading(movieSelector.value);
+    _emptyHomeworldSelector();
+    _fillHomeworldSelector(movieSelector.value);
+    _emptyCharacterCardList();
   });
+}
+
+function _emptyHomeworldSelector() {
+  while (homeworldSelector.firstChild) {
+    homeworldSelector.removeChild(homeworldSelector.firstChild);
+  }
+}
+
+async function _fillHomeworldSelector(id) {
+  // Añadimos la opción para el caso inicial "Select a homeworld"
+  var opt = document.createElement('option');
+  opt.appendChild(document.createTextNode('Select a homeworld'));
+  opt.value = '0';
+  homeworldSelector.appendChild(opt);
+
+  if (id != 0) {
+    // Obtenemos la lista de personajes y planetas
+    const charactersAndHomeworlds = await pec2.getMovieCharactersAndHomeworlds(id);
+
+    // Filtramos los planetas y eliminamos duplicidades
+    let homeworlds = [];
+    charactersAndHomeworlds.characters.forEach((character) => {
+      homeworlds.push(character.homeworld);
+    });
+
+    homeworlds = homeworlds.filter((item, index) => homeworlds.indexOf(item) == index);
+
+    // Añadimos la lista de planetas al selector
+    homeworlds.forEach((homeworld) => {
+      opt = document.createElement('option');
+      opt.appendChild(document.createTextNode(homeworld));
+      homeworldSelector.appendChild(opt);
+    });
+  }
+}
+
+function _emptyCharacterCardList() {
+  while (charecterCardList.firstChild) {
+    charecterCardList.removeChild(charecterCardList.firstChild);
+  }
 }
 
 export default {
   setMovieHeading,
   initMovieSelect,
+  initHomeworldSelect,
+  initCharacterList,
   setMovieSelectCallbacks,
 };
