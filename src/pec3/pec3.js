@@ -107,6 +107,7 @@ async function _fillHomeworldSelector(id) {
     homeworlds.forEach((homeworld) => {
       opt = document.createElement('option');
       opt.appendChild(document.createTextNode(homeworld));
+      opt.value = homeworld;
       homeworldSelector.appendChild(opt);
     });
   }
@@ -118,10 +119,40 @@ function _emptyCharacterCardList() {
   }
 }
 
+export function addChangeEventToSelectHomeworld() {
+  homeworldSelector.addEventListener('change', () => _changeCharacterList());
+}
+
+async function _changeCharacterList() {
+  _emptyCharacterCardList();
+  if (movieSelector.value != 0 && homeworldSelector.value != 0) {
+    let movie = await pec2.getMovieCharactersAndHomeworlds(movieSelector.value);
+    let characters = _filterCharactersByHomeworld(movie.characters, homeworldSelector.value);
+    _fillCharactersList(characters);
+  }
+}
+
+function _filterCharactersByHomeworld(characters, homeworld) {
+  let selectedCharacters = [];
+  characters.forEach((character) => {
+    if (character.homeworld == homeworld) {
+      selectedCharacters.push(character);
+    }
+  });
+  return selectedCharacters;
+}
+
+function _fillCharactersList(characters) {
+  characters.forEach((character) => {
+    console.log(character);
+  });
+}
+
 export default {
   setMovieHeading,
   initMovieSelect,
   initHomeworldSelect,
   initCharacterList,
   setMovieSelectCallbacks,
+  addChangeEventToSelectHomeworld,
 };

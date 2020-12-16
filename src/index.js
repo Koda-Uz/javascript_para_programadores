@@ -12,3 +12,5 @@ pec3.initHomeworldSelect('#select-homeworld');
 pec3.initCharacterList('.list__characters');
 
 pec3.setMovieSelectCallbacks();
+
+pec3.addChangeEventToSelectHomeworld();
