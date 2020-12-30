@@ -1,4 +1,5 @@
 import pec2 from './pec2';
+import user_image from '../assets/user.svg';
 
 let movieTitle;
 let movieInfo;
@@ -145,7 +146,53 @@ function _filterCharactersByHomeworld(characters, homeworld) {
 function _fillCharactersList(characters) {
   characters.forEach((character) => {
     console.log(character);
+    _createCharacterCard(character);
   });
+}
+
+function _createCharacterCard(character) {
+  // Card
+  var characterCard = document.createElement('li');
+  characterCard.className = 'list__item item character';
+
+  // Image
+  var img = document.createElement('img');
+  img.src = user_image;
+  img.className = 'character__image';
+
+  // Header
+  var header = document.createElement('h2');
+  header.className = 'character__name';
+  header.innerHTML = character.name;
+
+  // Birth
+  var birth = document.createElement('div');
+  birth.className = 'character__birth';
+  birth.innerHTML = '<strong>Birth Year: </strong>' + character.birth_year;
+
+  // Eye color
+  var eye = document.createElement('div');
+  eye.className = 'character__eye';
+  eye.innerHTML = '<strong>Eye Color: </strong>' + character.eye_color;
+
+  // Gender
+  var gender = document.createElement('div');
+  gender.className = 'character__gender';
+  gender.innerHTML = '<strong>Gender: </strong>' + character.gender;
+
+  // Homeworld
+  var homeworld = document.createElement('div');
+  homeworld.className = 'character__home';
+  homeworld.innerHTML = '<strong>Homeworld: </strong>' + character.homeworld;
+
+  characterCard.appendChild(img);
+  characterCard.appendChild(header);
+  characterCard.appendChild(birth);
+  characterCard.appendChild(eye);
+  characterCard.appendChild(gender);
+  characterCard.appendChild(homeworld);
+
+  charecterCardList.appendChild(characterCard);
 }
 
 export default {
