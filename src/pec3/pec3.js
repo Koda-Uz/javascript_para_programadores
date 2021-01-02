@@ -8,6 +8,11 @@ let movieSelector;
 let homeworldSelector;
 let charecterCardList;
 
+/*
+ ****************
+ ** Exercise 1 **
+ ****************
+ */
 export async function setMovieHeading(movieId, titleSelector, infoSelector, directorSelector) {
   // Obtenemos los elementos del DOM con QuerySelector y los almacenamos en una variable
   movieTitle = document.querySelector(titleSelector);
@@ -28,12 +33,19 @@ async function _fillMovieHeading(movieId) {
     movieInfo.innerHTML = 'Episode ' + movie.episodeID + ' - ' + movie.release;
     movieDirector.innerHTML = 'Director: ' + movie.director;
   } else {
+    // Si el id es 0 (ningún valor seleccionado)
+    // boorramos los campos
     movieTitle.innerHTML = '';
     movieInfo.innerHTML = '';
     movieDirector.innerHTML = '';
   }
 }
 
+/*
+ ****************
+ ** Exercise 2 **
+ ****************
+ */
 export async function initMovieSelect(selector) {
   // Obtenemos los elementos del DOM
   movieSelector = document.querySelector(selector);
@@ -60,31 +72,56 @@ export async function initMovieSelect(selector) {
   });
 }
 
+/*
+ ********************
+ ** Init Functions **
+ ********************
+ */
+
+// Obtiene el selector de mundos del DOM
 export function initHomeworldSelect(homeworld) {
   homeworldSelector = document.querySelector(homeworld);
   _fillHomeworldSelector(1);
 }
 
+// Obtiene la lista de personajes del DOM
 export function initCharacterList(characterList) {
   charecterCardList = document.querySelector(characterList);
 }
 
+/*
+ ****************
+ ** Exercise 3 **
+ ****************
+ */
 export async function setMovieSelectCallbacks() {
   // Añadimos el event listener al selector
   movieSelector.addEventListener('change', () => {
+    // Rellena el Header de la página
     _fillMovieHeading(movieSelector.value);
+    // Vacía el selector de mundos
     _emptyHomeworldSelector();
+    // LLena el selector de mundos con los planets de la película seleccionada
     _fillHomeworldSelector(movieSelector.value);
+    // Vacía la lista de personajes
     _emptyCharacterCardList();
   });
 }
 
+/*
+ ****************
+ ** Exercise 4 **
+ ****************
+ */
+
+// Elimina los valores del selector de mundos
 function _emptyHomeworldSelector() {
   while (homeworldSelector.firstChild) {
     homeworldSelector.removeChild(homeworldSelector.firstChild);
   }
 }
 
+// LLena el selector de mundos con los planetas presentes en la película seleccionada
 async function _fillHomeworldSelector(id) {
   // Añadimos la opción para el caso inicial "Select a homeworld"
   var opt = document.createElement('option');
@@ -114,25 +151,40 @@ async function _fillHomeworldSelector(id) {
   }
 }
 
+// Elimina los elementos de la lista de personajes
 function _emptyCharacterCardList() {
   while (charecterCardList.firstChild) {
     charecterCardList.removeChild(charecterCardList.firstChild);
   }
 }
 
+/*
+ ****************
+ ** Exercise 5 **
+ ****************
+ */
+
+// Añade el evento al seletor de mundos
 export function addChangeEventToSelectHomeworld() {
   homeworldSelector.addEventListener('change', () => _changeCharacterList());
 }
 
+// Actualiza la lista de personajes
 async function _changeCharacterList() {
+  // vacía la lista
   _emptyCharacterCardList();
+  // Comprueba que ambos selectores tengan un valor asignado
   if (movieSelector.value != 0 && homeworldSelector.value != 0) {
+    // obtiene la información dela peícula
     let movie = await pec2.getMovieCharactersAndHomeworlds(movieSelector.value);
+    // obtiene los personajes de el mundo seleccionado
     let characters = _filterCharactersByHomeworld(movie.characters, homeworldSelector.value);
+    // Rellena la lista con estos personajes
     _fillCharactersList(characters);
   }
 }
 
+// filtra una lista de personajes dejando unicamente los pertenecientes al planeta deseado
 function _filterCharactersByHomeworld(characters, homeworld) {
   let selectedCharacters = [];
   characters.forEach((character) => {
@@ -143,6 +195,7 @@ function _filterCharactersByHomeworld(characters, homeworld) {
   return selectedCharacters;
 }
 
+// Rellena las fichas de los personajes
 function _fillCharactersList(characters) {
   characters.forEach((character) => {
     console.log(character);
@@ -150,6 +203,7 @@ function _fillCharactersList(characters) {
   });
 }
 
+// Crea una ficha de personaje nueva y la añade al DOM
 function _createCharacterCard(character) {
   // Card
   var characterCard = document.createElement('li');
@@ -192,9 +246,15 @@ function _createCharacterCard(character) {
   characterCard.appendChild(gender);
   characterCard.appendChild(homeworld);
 
+  // Añade la ficha al DOM
   charecterCardList.appendChild(characterCard);
 }
 
+/*
+ *********************
+ ** Exports Section **
+ *********************
+ */
 export default {
   setMovieHeading,
   initMovieSelect,
