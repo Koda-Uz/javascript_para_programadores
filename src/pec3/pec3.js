@@ -9,6 +9,10 @@ let homeworldSelector;
 let charecterCardList;
 
 /*
+ * Álvaro Pérez Gómez
+ */
+
+/*
  ****************
  ** Exercise 1 **
  ****************

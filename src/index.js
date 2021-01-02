@@ -1,5 +1,9 @@
 import pec3 from './pec3/pec3';
 
+/*
+ * Álvaro Pérez Gómez
+ */
+
 console.log('Bienvenido a JS para programadores');
 
 // Init basic functions
